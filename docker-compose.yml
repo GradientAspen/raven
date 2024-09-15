@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  myapp:
+    build: .
+    ports:
+      - "8080:8080"
+      - "8983:8983"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/ravenDb?serverTimeZone=UTC
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_ROOT_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_OPEN_IN_VIEW=false
+      - SPRING_JACKSON_DESERIALIZATION_FAIL_ON_UNKNOWN_PROPERTIES=true
+      - SERVER_SERVLET_CONTEXT_PATH=/api
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: raven-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_USER: ${MYSQL_ROOT_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

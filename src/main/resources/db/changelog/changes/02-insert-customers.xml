@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="3" author="serhii_vasyliev">
+        <insert tableName="customer">
+            <column name="id" value="1"/>
+            <column name="created" value="1633012800000"/>
+            <column name="updated" value="1633012800000"/>
+            <column name="full_name" value="John Doe"/>
+            <column name="email" value="john.doe@google.com"/>
+            <column name="phone" value="+1234567890"/>
+            <column name="is_active" value="1"/>
+        </insert>
+
+        <insert tableName="customer">
+            <column name="id" value="2"/>
+            <column name="created" value="1633012800000"/>
+            <column name="updated" value="1633012800000"/>
+            <column name="full_name" value="Jane Smith"/>
+            <column name="email" value="jane.smith@google.com"/>
+            <column name="phone" value="+1987654321"/>
+            <column name="is_active" value="1"/>
+        </insert>
+
+        <insert tableName="customer">
+            <column name="id" value="3"/>
+            <column name="created" value="1633012800000"/>
+            <column name="updated" value="1633012800000"/>
+            <column name="full_name" value="Alex Johnson"/>
+            <column name="email" value="alex.johnson@google.com"/>
+            <column name="phone" value="+1122334455"/>
+            <column name="is_active" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

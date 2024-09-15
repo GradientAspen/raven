@@ -1,5 +1,6 @@
 package com.raven.service;
 
+import com.raven.dto.CustomerDto;
 import com.raven.model.Customer;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -8,17 +9,17 @@ import java.util.Optional;
 
 public interface CustomerService {
 
-    Customer createCustomer(Customer customer);
+    CustomerDto createCustomer(CustomerDto customer);
 
-    List<Customer> getAllActiveCustomers();
+    List<CustomerDto> getAllActiveCustomers();
 
-    Optional<Customer> getActiveCustomerById(Long id);
+    Optional<CustomerDto> getActiveCustomerById(Long id);
 
-    Customer updateCustomer(Long id, Customer customerDetails);
+    CustomerDto updateCustomer(Long id, CustomerDto customerDetails);
 
     void deleteCustomer(Long id);
 
-    Optional<Customer> findByEmail(String email);
+    Optional<CustomerDto> findByEmail(String email);
 
-    List<Customer> findCustomers(Specification<Customer> spec);
+
 }

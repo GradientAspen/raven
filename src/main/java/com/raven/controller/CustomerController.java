@@ -1,9 +1,8 @@
 package com.raven.controller;
 
-import com.raven.model.Customer;
+import com.raven.dto.CustomerDto;
 import com.raven.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,33 +27,33 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    @Operation(summary = "Create a new customer", description = "Creates a new customer and returns the created entity")
-    @PostMapping
-    public ResponseEntity<Customer> createCustomer(@Validated @RequestBody Customer customer) {
-        Customer newCustomer = customerService.createCustomer(customer);
-        return ResponseEntity.ok(newCustomer);
-    }
+   @Operation(summary = "Create a new customer", description = "Creates a new customer and returns the created entity")
+   @PostMapping
+   public ResponseEntity<CustomerDto> createCustomer(@Validated @RequestBody CustomerDto customer) {
+       CustomerDto newCustomer = customerService.createCustomer(customer);
+       return ResponseEntity.ok(newCustomer);
+   }
 
     @Operation(summary = "Get all active customers", description = "Returns a list of all active customers")
     @GetMapping
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        List<Customer> customers = customerService.getAllActiveCustomers();
+    public ResponseEntity<List<CustomerDto>> getAllCustomers() {
+        List<CustomerDto> customers = customerService.getAllActiveCustomers();
         return ResponseEntity.ok(customers);
     }
 
     @Operation(summary = "Get customer by ID", description = "Returns a customer by ID if the customer is active")
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
-        Optional<Customer> customerOptional = customerService.getActiveCustomerById(id);
+    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Long id) {
+        Optional<CustomerDto> customerOptional = customerService.getActiveCustomerById(id);
         return customerOptional.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @Operation(summary = "Update customer by ID", description = "Updates a customer's details, except for the email")
     @PutMapping("/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @Validated
-    @RequestBody Customer customerDetails) {
-        Customer updatedCustomer = customerService.updateCustomer(id, customerDetails);
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long id, @Validated
+    @RequestBody CustomerDto customerDetails) {
+        CustomerDto updatedCustomer = customerService.updateCustomer(id, customerDetails);
         return ResponseEntity.ok(updatedCustomer);
     }
 

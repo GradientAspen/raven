@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long>, JpaSpecificationExecutor<Customer> {
     Optional<Customer> findByEmail(String email);
-    List<Customer> findAllByActiveTrue();
-    Optional<Customer>findByIdAndActiveTrue(Long id);
+    List<Customer> findAllByIsActiveTrue();
+    Optional<Customer> findByIdAndIsActiveTrue(Long id);
 }
